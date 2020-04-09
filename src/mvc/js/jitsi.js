@@ -7,7 +7,7 @@
       }
     },
     mounted() {
-      const domain = 'meet.thomas.lan';
+      const domain = 'meet.apst.travel';
       const o = {
         roomName: 'BBNSolutions',
         height: '100%',
@@ -26,7 +26,7 @@
       };
       if (window.JitsiMeetExternalAPI === undefined) {
         let script = document.createElement('script');
-        script.src = 'https://meet.thomas.lan/external_api.js';
+        script.src = 'https://meet.apst.travel/external_api.js';
         script.onload = () => {
           this.jitsi = new JitsiMeetExternalAPI(domain, o);
         };

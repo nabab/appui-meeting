@@ -1,0 +1,19 @@
+{
+  "name": "bbn/appui-meeting",
+  "description": "A RTC meeting iomplementation for appui",
+  "keywords": ["rtc", "meeting" "php", "appui"],
+  "homepage": "https://github.com/nabab/appui-meeting",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Thomas Nabet",
+      "email": "thomas.nabet@gmail.com",
+      "homepage": "http://bbn.solutions",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": ">=7.2",
+    "bbn/bbn": "dev-master"
+  }
+}
