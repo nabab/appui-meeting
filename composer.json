@@ -1,7 +1,7 @@
 {
   "name": "bbn/appui-meeting",
   "description": "A RTC meeting iomplementation for appui",
-  "keywords": ["rtc", "meeting" "php", "appui"],
+  "keywords": ["rtc", "meeting", "php", "appui"],
   "homepage": "https://github.com/nabab/appui-meeting",
   "license": "MIT",
   "authors": [
