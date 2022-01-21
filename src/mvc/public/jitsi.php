@@ -5,4 +5,6 @@
  * @var $ctrl \bbn\Mvc\Controller 
  *
  */
-$ctrl->combo(_("Meeting BBN"));
+if (defined('BBN_MEET_DOMAIN')) {
+  $ctrl->combo(_("Meeting BBN"), ['domain' => BBN_MEET_DOMAIN]);
+}
