@@ -1,1 +1,0 @@
-<div class="appui-meeting-admin-groups"></div>

@@ -2,16 +2,22 @@
   <appui-meeting-admin-toolbar @serverChanged="onServerChanged"
                                @addRoom="addRoom"/>
   <div class="bbn-flex-fill">
-    <bbn-table :source="root + 'data/admin/rooms/public'"
+    <bbn-table :source="root + 'data/admin/rooms'"
               @serverChanged="onServerChanged"
               :data="{
-                server: currentServer
+                server: currentServer,
+                type: type
               }"
               :pageable="true"
               ref="table"
               v-if="currentServer">
-      <bbns-column field="text"
+      <bbns-column :field="prefCfg.text"
                    title="<?=_('Name')?>"/>
+      <bbns-column :field="prefCfg.id_group"
+                   title="<?=_('Group')?>"
+                   v-if="type === 'groups'"
+                   :render="renderGroup"
+                   :width="180"/>
       <bbns-column field="created"
                    title="<?=_('Created')?>"
                    :render="renderDate"

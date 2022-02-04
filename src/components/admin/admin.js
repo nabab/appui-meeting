@@ -14,6 +14,15 @@
       },
       servers(){
         return this.admin.source.servers;
+      },
+      usersCfg(){
+        return this.admin.source.usersCfg;
+      },
+      groupsCfg(){
+        return this.admin.source.groupsCfg;
+      },
+      prefCfg(){
+        return this.admin.source.prefCfg;
       }
     },
     beforeMount(){

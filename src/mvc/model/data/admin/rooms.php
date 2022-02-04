@@ -1,8 +1,39 @@
 <?php
-if (!empty($model->data['data']['server'])) {
+if (!empty($model->data['data']['server'])
+  && !empty($model->data['data']['type'])
+) {
   $meeting = new \bbn\Appui\Meeting($model->db);
   $prefCfg = $model->inc->pref->getClassCfg();
   $prefFields = $prefCfg['arch']['user_options'];
+  $filters = [
+    'conditions' => [[
+      'field' => $prefFields['id_option'],
+      'value' => $model->data['data']['server']
+    ], [
+      'field' => $prefFields['id_alias'],
+      'operator' => 'isnull'
+    ]]
+  ];
+  switch ($model->data['data']['type']) {
+    case 'public':
+      $filters['conditions'][] = [
+        'field' => $prefFields['public'],
+        'value' => 1
+      ];
+      break;
+    case 'users':
+      $filters['conditions'][] = [
+        'field' => $prefFields['id_user'],
+        'operator' => 'isnotnull'
+      ];
+      break;
+    case 'groups':
+      $filters['conditions'][] = [
+        'field' => $prefFields['id_group'],
+        'operator' => 'isnotnull'
+      ];
+      break;
+  }
   $grid = new \bbn\Appui\Grid($model->db, $model->data, [
     'table' => $prefCfg['table'],
     'fields' => [
@@ -15,15 +46,7 @@ if (!empty($model->data['data']['server'])) {
       'last_use' => 'JSON_UNQUOTE(JSON_EXTRACT('.$prefFields['cfg'].', "$.last_use"))',
       'last_duration' => 'JSON_UNQUOTE(JSON_EXTRACT('.$prefFields['cfg'].', "$.last_duration"))',
     ],
-    'filters' => [
-      'conditions' => [[
-        'field' => $prefFields['id_option'],
-        'value' => $model->data['data']['server']
-      ], [
-        'field' => $prefFields['public'],
-        'value' => 1
-      ]]
-    ],
+    'filters' => $filters,
     'order' => [[
       'field' => $prefFields['text'],
       'dir' => 'ASC'

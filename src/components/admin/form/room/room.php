@@ -1,20 +1,26 @@
-<bbn-form :action="root + 'actions/admin/add'"
+<bbn-form :action="root + 'actions/admin/' + (source.id ? 'edit' : 'add')"
           :source="source"
-          class="appui-meeting-admin-form-add"
+          :data="{
+            server: server,
+            type: type
+          }"
+          class="appui-meeting-admin-form-room"
           @success="onSuccess">
   <div class="bbn-spadded bbn-grid-fields">
     <label class="bbn-label"><?=_('Name')?></label>
-    <bbn-input v-model="source.text"
+    <bbn-input v-model="source[prefCfg.text]"
                :required="true"/>
-    <template v-if="source.id_group !== undefined">
+    <template v-if="type === 'groups'">
       <label class="bbn-label"><?=_('Group')?></label>
       <div>
-        <bbn-dropdown v-model="source.id_group"
+        <bbn-dropdown v-model="source[prefCfg.id_group]"
                       :source="groups"
-                      :required="true"/>
+                      :required="true"
+                      :sourceText="groupsCfg.group"
+                      :sourceValue="groupsCfg.id"/>
       </div>
     </template>
-    <template v-if="source.moderators !== undefined">
+    <template v-if="type !== 'users'">
       <label class="bbn-label"><?=_('Moderators')?></label>
       <div>
         <bbn-multiselect v-model="source.moderators"
@@ -22,10 +28,10 @@
                         :required="true"/>
       </div>
     </template>
-    <template v-if="source.id_user !== undefined">
+    <template v-if="type === 'users'">
       <label class="bbn-label"><?=_('Moderator')?></label>
       <div>
-        <bbn-dropdown v-model="source.id_user"
+        <bbn-dropdown v-model="source[prefCfg.id_user]"
                       :source="users"
                       :required="true"/>
       </div>
