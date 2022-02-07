@@ -9,7 +9,8 @@
   <div class="bbn-spadded bbn-grid-fields">
     <label class="bbn-label"><?=_('Name')?></label>
     <bbn-input v-model="source[prefCfg.text]"
-               :required="true"/>
+               :required="true"
+               pattern="[a-zA-Z0-9\-\_]*$"/>
     <template v-if="type === 'groups'">
       <label class="bbn-label"><?=_('Group')?></label>
       <div>

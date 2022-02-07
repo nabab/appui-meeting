@@ -2,60 +2,152 @@
   return {
     data(){
       return {
-        hasMeet: false,
-        domain: this.source.meetURL ? this.source.meetURL.replace(/https{0,1}:\/\//i, '').replace(/\/{0,1}$/, '') : '',
         currentMeet: false,
+        currentRoomID: false,
+        currentRoom: false,
+        currentServer: false,
+        currentToken: false,
         ready: false,
-        APILoadError: false
+        APILoaded: false,
+        APILoadError: false,
+        root: appui.plugins['appui-meeting'] + '/'
+      }
+    },
+    computed: {
+      administeredRooms(){
+        if (this.source.rooms && this.source.rooms.length) {
+          return bbn.fn.filter(this.source.rooms, room => room.moderators.includes(appui.app.user.id));
+        }
+        return [];
+      },
+      yourRooms(){
+        if (this.source.rooms && this.source.rooms.length) {
+          return bbn.fn.filter(this.source.rooms, room => !room.moderators.includes(appui.app.user.id));
+        }
+        return [];
       }
     },
     methods: {
-      onAPILoaded(ev){
+      joinMeet(meet){
+        bbn.fn.log('jooooin', meet)
+        this.APILoaded = false;
         this.APILoadError = false;
-        this.ready = true;
-      },
-      onAPILoadError(ev){
-        this.APILoadError = true;
-        this.ready = false;
+        if (!!meet.id && !!meet[this.source.prefCfg.id_option] && !!meet[this.source.prefCfg.text]) {
+          this.currentServer = bbn.fn.getField(this.source.servers, 'code', {value: meet[this.source.prefCfg.id_option]});
+          this.currentRoomID = meet.id;
+          this.currentRoom = meet[this.source.prefCfg.text];
+          this.currentToken = false;
+          if (!!this.currentServer) {
+            if (meet.moderators.includes(appui.app.user.id)) {
+              this.post(this.root + 'actions/token', {
+                idRoom: meet.id,
+                idUser: appui.app.user.id
+              }, d => {
+                if (d.success && d.token) {
+                  this.currentToken = d.token;
+                  this._loadAPI();
+                }
+              });
+            }
+            else {
+              this._loadAPI();
+            }
+          }
+        }
       },
       makeMeet(){
-        if (this.ready && this.domain && !this.hasMeet) {
-          this.hasMeet = true;
+        if (this.ready
+          && !this.currentMeet
+          && !!this.currentServer
+          && !!this.currentRoomID
+          && !!this.currentRoom
+        ) {
+          this.currentMeet = true;
           this.$nextTick(() => {
             let opt = {
-              roomName: 'testing',
+              roomName: this.currentRoom,
               width: '100%',
               height: '100%',
               parentNode: this.getRef('meetContainer'),
-              jwt: this.source.meetUserToken,
-              onload: this.onMeetLoad,
               userInfo: {
+                uid: appui.app.user.id,
                 email: appui.app.user.email,
                 displayName: appui.app.user.name
               }
             };
-            this.currentMeet = new JitsiMeetExternalAPI(this.domain, opt);
-            this.currentMeet.addListener('videoConferenceLeft', this.onVideoConferenceLeft);
+            if (this.currentToken) {
+              opt.jwt = this.currentToken;
+            }
+            this.currentMeet = new JitsiMeetExternalAPI(this.currentServer, opt);
+            this.currentMeet.addListener('videoConferenceLeft', this._onVideoConferenceLeft);
+            this.currentMeet.addListener('videoConferenceJoined', this._onVideoConferenceJoined);
+            this.currentMeet.addListener('participantJoined', this._onParticipantJoined);
           });
         }
       },
-      onMeetLoad(ev){
-        bbn.fn.log('meet loaded', ev);
+      _loadAPI(){
+        let script = document.getElementById('appui-meeting-api');
+        if (script) {
+          script.remove();
+        }
+        script = document.createElement('script');
+        script.setAttribute('id', 'appui-meeting-api');
+        script.setAttribute('type', 'text/javascript');
+        script.setAttribute('src', `https://${this.currentServer}/external_api.js`);
+        script.onload = this._onAPILoaded;
+        script.onerror = this._onAPILoadError;
+        document.head.insertAdjacentElement('beforeend', script);
       },
-      onVideoConferenceLeft(ev){
-        bbn.fn.log('OUT', ev);
-        this.hasMeet = false;
+      _onAPILoaded(ev){
+        this.APILoadError = false;
+        this.APILoaded = true;
+        this.makeMeet()
+      },
+      _onAPILoadError(ev){
+        this.APILoadError = true;
+        this.APILoaded = false;
+      },
+      _onVideoConferenceLeft(ev){
+        let cont = this.getRef('meetContainer'),
+            iframe = !!cont ? cont.querySelector('iframe') : false;
+        if (iframe) {
+          iframe.remove();
+        }
+        this.post(this.root + 'actions/leaved', {
+          idRoom: this.currentRoomID,
+          idUser: appui.app.user.id
+        }, d => {
+          if (!d.success) {
+            appui.error();
+          }
+        });
+        this.post(this.root + 'data/rooms', d => {
+          if (d.servers !== undefined) {
+            this.source.servers.splice(0, this.source.servers.length, ...d.servers);
+          }
+          if (d.rooms !== undefined) {
+            this.source.rooms.splice(0, this.source.rooms.length, ...d.rooms);
+          }
+        });
+        this.currentMeet = false;
+        this.currentServer = false;
+        this.currentRoomID = false;
+        this.currentRoom = false;
+      },
+      _onVideoConferenceJoined(ev){
+        this.post(this.root + 'actions/joined', {
+          idRoom: this.currentRoomID,
+          idUser: appui.app.user.id
+        }, d => {
+          if (!d.success) {
+            this._onVideoConferenceLeft();
+            appui.error();
+          }
+        })
       }
     },
     mounted(){
-      if (window.JitsiMeetExternalAPI === undefined) {
-        let script = document.createElement('script');
-        script.setAttribute('type', 'text/javascript');
-        script.setAttribute('src', `${(!this.source.meetURL.startsWith('https://') ? 'https://' : '') + this.source.meetURL}/external_api.js`);
-        script.onload = this.onAPILoaded;
-        script.onerror = this.onAPILoadError;
-        document.head.insertAdjacentElement('beforeend', script);
-      }
+      this.ready = true;
     }
   }
 })();
