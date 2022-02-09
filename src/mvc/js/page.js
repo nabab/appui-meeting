@@ -2,11 +2,13 @@
   return {
     data(){
       return {
-        currentMeet: false,
+        currentMeeting: false,
+        currentMeetingID: false,
         currentRoomID: false,
         currentRoom: false,
         currentServer: false,
         currentToken: false,
+        currentTmp: false,
         ready: false,
         APILoaded: false,
         APILoadError: false,
@@ -57,20 +59,20 @@
       },
       makeMeet(){
         if (this.ready
-          && !this.currentMeet
+          && !this.currentMeeting
           && !!this.currentServer
           && !!this.currentRoomID
           && !!this.currentRoom
         ) {
-          this.currentMeet = true;
+          this.currentMeeting = true;
           this.$nextTick(() => {
             let opt = {
               roomName: this.currentRoom,
+              confID:'123456',
               width: '100%',
               height: '100%',
               parentNode: this.getRef('meetContainer'),
               userInfo: {
-                uid: appui.app.user.id,
                 email: appui.app.user.email,
                 displayName: appui.app.user.name
               }
@@ -78,10 +80,11 @@
             if (this.currentToken) {
               opt.jwt = this.currentToken;
             }
-            this.currentMeet = new JitsiMeetExternalAPI(this.currentServer, opt);
-            this.currentMeet.addListener('videoConferenceLeft', this._onVideoConferenceLeft);
-            this.currentMeet.addListener('videoConferenceJoined', this._onVideoConferenceJoined);
-            this.currentMeet.addListener('participantJoined', this._onParticipantJoined);
+            this.currentMeeting = new JitsiMeetExternalAPI(this.currentServer, opt);
+            this.currentMeeting.addListener('videoConferenceLeft', this._onVideoConferenceLeft);
+            this.currentMeeting.addListener('videoConferenceJoined', this._onVideoConferenceJoined);
+            //this.currentMeeting.addListener('participantJoined', this._onParticipantJoined);
+            this.currentMeeting.addListener('dataChannelOpened', (a, b) => {bbn.fn.log('MIRKO', a, b)});
           });
         }
       },
@@ -108,14 +111,11 @@
         this.APILoaded = false;
       },
       _onVideoConferenceLeft(ev){
-        let cont = this.getRef('meetContainer'),
-            iframe = !!cont ? cont.querySelector('iframe') : false;
-        if (iframe) {
-          iframe.remove();
-        }
+        this.currentMeeting.dispose();
         this.post(this.root + 'actions/leaved', {
           idRoom: this.currentRoomID,
-          idUser: appui.app.user.id
+          idUser: appui.app.user.id,
+          idTmp: this.currentTmp
         }, d => {
           if (!d.success) {
             appui.error();
@@ -129,15 +129,20 @@
             this.source.rooms.splice(0, this.source.rooms.length, ...d.rooms);
           }
         });
-        this.currentMeet = false;
+        this.currentMeeting = false;
+        this.currentMeetingID = false;
         this.currentServer = false;
         this.currentRoomID = false;
         this.currentRoom = false;
+        this.currentTmp = false;
       },
       _onVideoConferenceJoined(ev){
+        bbn.fn.log('JOINED', ev);
+        this.currentTmp = ev.id;
         this.post(this.root + 'actions/joined', {
           idRoom: this.currentRoomID,
-          idUser: appui.app.user.id
+          idUser: appui.app.user.id,
+          idTmp: ev.id
         }, d => {
           if (!d.success) {
             this._onVideoConferenceLeft();

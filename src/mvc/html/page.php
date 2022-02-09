@@ -1,5 +1,5 @@
 <div class="appui-meeting bbn-overlay">
-  <div v-if="currentMeet"
+  <div v-if="currentMeeting"
         ref="meetContainer"
         class="bbn-overlay">
   </div>
@@ -9,7 +9,7 @@
       <bbn-splitter orientation="auto">
         <bbn-pane class="bbn-radius bbn-bordered appui-meeting-adminroom">
           <div class="bbn-flex-height">
-            <div class="bbn-header bbn-b bbn-upper bbn-padded bbn-radius-top bbn-no-border">
+            <div class="bbn-header bbn-b bbn-upper bbn-padded bbn-radius-top bbn-no-border bbn-secondary-text-alt">
               <?=_('Administered rooms')?>
             </div>
             <div class="bbn-flex-fill">
@@ -18,7 +18,8 @@
                         :componentOptions="{
                           usersCfg: source.usersCfg,
                           groupsCfg: source.groupsCfg,
-                          prefCfg: source.prefCfg
+                          prefCfg: source.prefCfg,
+                          participantsCfg: source.participantsCfg
                         }"
                         :alternate-background="true"
                         @joinMeet="joinMeet"/>
@@ -27,7 +28,7 @@
         </bbn-pane>
         <bbn-pane class="bbn-radius bbn-bordered appui-meeting-yourroom">
           <div class="bbn-flex-height">
-            <div class="bbn-header bbn-b bbn-upper bbn-padded bbn-radius-top bbn-no-border">
+            <div class="bbn-header bbn-b bbn-upper bbn-padded bbn-radius-top bbn-no-borderm bbn-tertiary-text-alt">
               <?=_('Your rooms')?>
             </div>
             <div class="bbn-flex-fill">
@@ -36,7 +37,8 @@
                         :componentOptions="{
                           usersCfg: source.usersCfg,
                           groupsCfg: source.groupsCfg,
-                          prefCfg: source.prefCfg
+                          prefCfg: source.prefCfg,
+                          participantsCfg: source.participantsCfg
                         }"
                         :alternate-background="true"
                         @joinMeet="joinMeet"/>

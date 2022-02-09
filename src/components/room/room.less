@@ -4,8 +4,8 @@
     animation: meetinglivesecondary 2s alternate infinite;
   }
   .appui-meeting-room-live {
-    color: var(--tertiary-background);
-    animation: meetinglivetertiary 2s alternate infinite;
+    color: var(--primary-background);
+    animation: meetinglive 2s alternate infinite;
   }
 }
 
@@ -21,14 +21,14 @@
   }
 }
 
-@keyframes meetinglivetertiary {
+@keyframes meetinglive {
   0% {
-    color: var(--tertiary-background);
+    color: var(--primary-background);
     text-shadow: none;
   }
   100% {
-    color: var(--tertiary-text);
-    text-shadow: 0 0 0.6rem var(--tertiary-background), 0 0 1.5rem var(--tertiary-background),
-      -0.2rem 0.1rem 1rem var(--tertiary-background), 0.2rem 0.1rem 1rem var(--tertiary-background);
+    color: var(--primary-text);
+    text-shadow: 0 0 0.6rem var(--primary-background), 0 0 1.5rem var(--primary-background),
+      -0.2rem 0.1rem 1rem var(--primary-background), 0.2rem 0.1rem 1rem var(--primary-background);
   }
 }

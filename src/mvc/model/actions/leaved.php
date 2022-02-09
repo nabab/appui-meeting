@@ -1,8 +1,14 @@
 <?php
-if ($model->hasData(['idUser', 'idRoom'], true)) {
+if ($model->hasData(['idRoom', 'idUser', 'idTmp'], true)) {
   $meeting = new \bbn\Appui\Meeting($model->db);
-  return [
-    'success' => $meeting->setLeaved($model->data['idUser'], $model->data['idRoom'])
-  ];
+  if ($idMeeting = $meeting->getStartedMeeting($model->data['idRoom'])) {
+    return [
+      'success' => $meeting->setLeaved(
+        $idMeeting,
+        $model->data['idTmp'],
+        $model->data['idUser']
+      )
+    ];
+  }
 }
 return ['success' => false];
