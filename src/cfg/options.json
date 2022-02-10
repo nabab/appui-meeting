@@ -1,0 +1,20 @@
+{
+  "cfg": {
+    "show_code": 1,
+    "show_icon": 1,
+    "allow_children": 1,
+    "i18n": "en"
+  },
+  "text": "Meeting",
+  "code": "meeting",
+  "id_alias": ["plugin", "list", "templates", "option", "appui"],
+  "icon": "nf nf-mdi-webcam",
+  "plugin": true,
+  "items": [
+    {
+      "text": "List",
+      "code": "list",
+      "icon": "nf nf-fa-server"
+    }
+  ]
+}

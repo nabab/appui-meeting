@@ -1,0 +1,34 @@
+.appui-meeting-room {
+  .appui-meeting-room-live-admin {
+    color: var(--secondary-background);
+    animation: meetinglivesecondary 2s alternate infinite;
+  }
+  .appui-meeting-room-live {
+    color: var(--primary-background);
+    animation: meetinglive 2s alternate infinite;
+  }
+}
+
+@keyframes meetinglivesecondary {
+  0% {
+    color: var(--secondary-background);
+    text-shadow: none;
+  }
+  100% {
+    color: var(--secondary-text);
+    text-shadow: 0 0 0.6rem var(--secondary-background), 0 0 1.5rem var(--secondary-background),
+      -0.2rem 0.1rem 1rem var(--secondary-background), 0.2rem 0.1rem 1rem var(--secondary-background);
+  }
+}
+
+@keyframes meetinglive {
+  0% {
+    color: var(--primary-background);
+    text-shadow: none;
+  }
+  100% {
+    color: var(--primary-text);
+    text-shadow: 0 0 0.6rem var(--primary-background), 0 0 1.5rem var(--primary-background),
+      -0.2rem 0.1rem 1rem var(--primary-background), 0.2rem 0.1rem 1rem var(--primary-background);
+  }
+}
