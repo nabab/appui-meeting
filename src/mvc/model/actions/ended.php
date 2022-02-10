@@ -1,0 +1,2 @@
+<?php
+return ['success' => false];

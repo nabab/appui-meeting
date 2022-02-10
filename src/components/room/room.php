@@ -1,6 +1,20 @@
 <div class="appui-meeting-room bbn-padded bbn-bordered-bottom bbn-flex-width">
-  <div v-text="source[prefCfg.text]"
-       class="bbn-flex-fill bbn-vmiddle bbn-hpadded"/>
+  <div class="bbn-flex-fill bbn-vmiddle bbn-hpadded">
+    <div class="bbn-l">
+      <div v-text="source[prefCfg.text]"
+           :class="{
+             'bbn-b': true,
+             'bbn-secondary-text-alt': !!administered,
+             'bbn-tertiary-text-alt': !administered
+           }"/>
+      <div v-if="lastUse"
+           class="bbn-s bbn-top-sspace">
+        <i class="nf nf-mdi-calendar_clock"
+           title="<?=_('Last use')?>"/>
+        <span v-text="lastUse"></span>
+      </div>
+    </div>
+  </div>
   <div class="bbn-middle bbn-upper bbn-hpadded bbn-b appui-meeting-room-live"
        v-if="!!source.live"><?=_('LIVE')?></div>
   <div class="bbn-hpadded">

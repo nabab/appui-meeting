@@ -40,11 +40,11 @@
         if (this.source.participants && this.source.participants.length) {
           let i = 1;
           ret = bbn.fn.map(this.source.participants, m => {
-            if (!!m[this.partecipantsCfg.id_user]) {
-              return appui.app.getUserName(m[this.partecipantsCfg.id_user])
+            if (!!m[this.participantsCfg.id_user]) {
+              return appui.app.getUserName(m[this.participantsCfg.id_user])
             }
-            if (!!m[this.partecipantsCfg.name]) {
-              return m[this.partecipantsCfg.name];
+            if (!!m[this.participantsCfg.name]) {
+              return m[this.participantsCfg.name];
             }
             return bbn._('External user') + (i > 1 ? i : '');
           }).sort().join("\n");
@@ -53,7 +53,7 @@
       },
       contextItems(){
         let ret = [];
-        if (this.source.participants && this.source.participants.length) {
+        if (!!this.source.live && (!this.source.participants || !this.source.participants.length)) {
           ret.push({
             text: bbn._('Stop meet'),
             icon: 'nf nf-oct-stop',
@@ -66,6 +66,12 @@
           action: this.openReports
         })
         return ret;
+      },
+      lastUse(){
+        if (!!this.source.last) {
+          return dayjs(this.source.last).format('DD/MM/YYYY HH:mm');
+        }
+        return '';
       }
     },
     methods: {
@@ -76,7 +82,9 @@
 
       },
       openReports(){
+        /* this.getPopup().open({
 
+        }); */
       }
     }
   }

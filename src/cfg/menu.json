@@ -1,0 +1,19 @@
+{
+  "text": "Meeting",
+  "num": 18,
+  "icon": "nf nf-mdi-webcam",
+  "items": [
+    {
+      "text": "Meetings",
+      "num": 1,
+      "icon": "nf nf-mdi-webcam",
+      "link": "list"
+    },
+    {
+      "text": "Meeting Management",
+      "num": 2,
+      "icon": "nf nf-fa-cog",
+      "link": "admin"
+    }
+  ]
+}
