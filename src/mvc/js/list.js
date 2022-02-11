@@ -152,21 +152,23 @@
       }
     },
     mounted(){
-      appui.$on('appui-meeting', (type, data) => {
-        if (data.rooms !== undefined) {
-          this.source.rooms.splice(0, this.source.rooms.length, ...data.rooms);
-        }
-        if (data.servers !== undefined) {
-          this.source.servers.splice(0, this.source.servers.length, ...data.servers);
-        }
-      });
-      appui.poll({
-        'appui-meeting': {
-          roomsHash: false,
-          serversHash: false
-        }
-      });
-      this.ready = true;
+      this.$nextTick(() => {
+        appui.$on('appui-meeting', (type, data) => {
+          if (data.rooms !== undefined) {
+            this.source.rooms.splice(0, this.source.rooms.length, ...data.rooms);
+          }
+          if (data.servers !== undefined) {
+            this.source.servers.splice(0, this.source.servers.length, ...data.servers);
+          }
+        });
+        appui.poll({
+          'appui-meeting': {
+            roomsHash: false,
+            serversHash: false
+          }
+        });
+        this.ready = true;
+      })
     }
   }
 })();
