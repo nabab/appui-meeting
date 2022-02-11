@@ -1,7 +1,24 @@
 <div class="appui-meeting bbn-overlay">
   <div v-if="currentMeeting"
-        ref="meetContainer"
-        class="bbn-overlay">
+        class="bbn-overlay bbn-flex-height">
+    <div v-if="currentMeetingID && currentRoomID && isModerator(currentRoomID)"
+         class="bbn-padded bbn-header bbn-flex-width appui-meeting-toolbar">
+      <bbn-button @click="inviteUsers"
+                  icon="nf nf-fa-user_plus">
+        <?=_('Invite user(s)')?>
+      </bbn-button>
+      <div class="bbn-flex-fill bbn-r">
+        <span><?=_('External URL')?>: </span>
+        <bbn-input :value="currentMeetingExtURL"
+                   :readonly="true"
+                   class="appui-meeting-toolbar-url"
+                   button-right="nf nf-mdi-content_copy"
+                   @clickRightButton="copyURL"/>
+      </div>
+    </div>
+    <div class="bbn-flex-fill"
+         ref="meetContainer">
+    </div>
   </div>
   <div v-else
         class="bbn-overlay bbn-middle bbn-xlpadded bbn-alt-background">
@@ -10,7 +27,7 @@
         <bbn-pane v-if="administeredRooms.length"
                   class="bbn-radius bbn-bordered appui-meeting-adminroom">
           <div class="bbn-flex-height">
-            <div class="bbn-header bbn-b bbn-upper bbn-padded bbn-radius-top bbn-no-border bbn-secondary-text-alt">
+            <div class="bbn-header bbn-b bbn-upper bbn-padded bbn-radius-top bbn-no-border bbn-secondary-text-alt bbn-lg">
               <?=_('Administered rooms')?>
             </div>
             <div class="bbn-flex-fill">
@@ -31,11 +48,27 @@
         </bbn-pane>
         <bbn-pane class="bbn-radius bbn-bordered appui-meeting-yourroom">
           <div class="bbn-flex-height">
-            <div class="bbn-header bbn-b bbn-upper bbn-padded bbn-radius-top bbn-no-borderm bbn-tertiary-text-alt">
-              <?=_('Your rooms')?>
+            <div class="bbn-header bbn-b bbn-upper bbn-padded bbn-radius-top bbn-no-border bbn-tertiary-text-alt bbn-lg">
+              <span v-if="invitedRooms.length"><?=_('Invited')?></span>
+              <span v-else><?=_('Your rooms')?></span>
             </div>
             <div class="bbn-flex-fill">
               <bbn-scroll>
+                <div v-if="invitedRooms.length">
+                  <bbn-list :source="invitedRooms"
+                            component="appui-meeting-room"
+                            :componentOptions="{
+                              usersCfg: source.usersCfg,
+                              groupsCfg: source.groupsCfg,
+                              prefCfg: source.prefCfg,
+                              participantsCfg: source.participantsCfg
+                            }"
+                            :alternate-background="true"
+                            @joinMeet="joinMeet"/>
+                  <div class="bbn-header bbn-b bbn-upper bbn-padded bbn-radius-top bbn-no-border bbn-tertiary-text-alt bbn-lg">
+                    <?=_('Your rooms')?>
+                  </div>
+                </div>
                 <bbn-list :source="yourRooms"
                           component="appui-meeting-room"
                           :componentOptions="{

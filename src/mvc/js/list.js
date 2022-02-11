@@ -4,6 +4,7 @@
       return {
         currentMeeting: false,
         currentMeetingID: false,
+        currentMeetingExtURL: false,
         currentRoomID: false,
         currentRoom: false,
         currentServer: false,
@@ -24,20 +25,29 @@
       },
       yourRooms(){
         if (this.source.rooms && this.source.rooms.length) {
-          return bbn.fn.filter(this.source.rooms, room => !room.moderators.includes(appui.app.user.id));
+          return bbn.fn.filter(
+            this.source.rooms,
+            room => (!room.moderators.includes(appui.app.user.id) && !room.invited.includes(appui.app.user.id))
+          );
         }
         return [];
-      }
+      },
+      invitedRooms(){
+        if (this.source.rooms && this.source.rooms.length) {
+          return bbn.fn.filter(this.source.rooms, room => room.invited.includes(appui.app.user.id));
+        }
+        return [];
+      },
     },
     methods: {
       joinMeet(meet){
-        bbn.fn.log('jooooin', meet)
         this.APILoaded = false;
         this.APILoadError = false;
         if (!!meet.id && !!meet[this.source.prefCfg.id_option] && !!meet[this.source.prefCfg.text]) {
           this.currentServer = bbn.fn.getField(this.source.servers, 'code', {value: meet[this.source.prefCfg.id_option]});
           this.currentRoomID = meet.id;
           this.currentRoom = meet[this.source.prefCfg.text];
+          this.currentMeetingExtURL = `https://${this.currentServer}/${this.currentRoom}`;
           this.currentToken = false;
           if (!!this.currentServer) {
             if (meet.moderators.includes(appui.app.user.id)) {
@@ -88,6 +98,29 @@
           });
         }
       },
+      isModerator(idRoom){
+        return !!bbn.fn.getRow(this.administeredRooms, {[this.source.prefCfg.id]: idRoom});
+      },
+      inviteUsers(){
+        if (this.currentRoomID) {
+          let room = bbn.fn.getRow(this.source.rooms, {[this.source.prefCfg.id]: this.currentRoomID});
+          if (!!room) {
+            this.getPopup().open({
+              title: bbn._('Invite users'),
+              component: 'appui-meeting-users',
+              componentOptions: {
+                meeting: this.currentMeetingID,
+                users: bbn.fn.filter(appui.app.getActiveUsers(), u => !room.invited.includes(u.value))
+              },
+              width: 400,
+              height: 500
+            });
+          }
+        }
+      },
+      copyURL(){
+
+      },
       _loadAPI(){
         let script = document.getElementById('appui-meeting-api');
         if (script) {
@@ -137,14 +170,16 @@
         this.currentTmp = false;
       },
       _onVideoConferenceJoined(ev){
-        bbn.fn.log('JOINED', ev);
         this.currentTmp = ev.id;
         this.post(this.root + 'actions/joined', {
           idRoom: this.currentRoomID,
           idUser: appui.app.user.id,
           idTmp: ev.id
         }, d => {
-          if (!d.success) {
+          if (d.success && !!d.idMeeting) {
+            this.currentMeetingID = d.idMeeting;
+          }
+          else {
             this._onVideoConferenceLeft();
             appui.error();
           }

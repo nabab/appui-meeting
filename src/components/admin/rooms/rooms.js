@@ -15,6 +15,9 @@
     methods: {
       onServerChanged(server){
         this.currentServer = server;
+        this.$nextTick(() => {
+          this.getRef('table').updateData();
+        });
       },
       addRoom(){
         let source = {
