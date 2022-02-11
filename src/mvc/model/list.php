@@ -7,6 +7,6 @@ return \bbn\X::mergeArrays([
   'usersCfg' => $userCfg['arch']['users'],
   'groupsCfg' => $userCfg['arch']['groups'],
   'prefCfg' => $prefCfg['arch']['user_options'],
-  'meetingCfg' => $meetingCfg['arch']['meeting'],
+  'meetingCfg' => $meetingCfg['arch']['meetings'],
   'participantsCfg' => $meetingCfg['arch']['participants']
 ], $model->getModel(APPUI_MEETING_ROOT . 'data/rooms'));
