@@ -161,14 +161,16 @@
             this.source.servers.splice(0, this.source.servers.length, ...data.servers);
           }
         });
-        appui.poll({
-          'appui-meeting': {
-            roomsHash: false,
-            serversHash: false
-          }
+        appui.$set(appui.pollerObject, 'appui-meeting', {
+          roomsHash: false,
+          serversHash: false
         });
+        appui.poll();
         this.ready = true;
       })
+    },
+    beforeDestroy(){
+      this.$off('appui-meeting');
     }
   }
 })();
