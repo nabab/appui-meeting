@@ -32,6 +32,14 @@
   </div>
   <div v-else
         class="bbn-overlay bbn-middle bbn-xlpadded bbn-alt-background">
+    <div v-if="source.isAdmin"
+         class="bbn-top-right bbn-top-sspace bbn-right-sspace">
+      <bbn-button class="appui-meeting-admin-btn"
+                  icon="nf nf-fae-tools bbn-xxl"
+                  :notext="true"
+                  text="<?=_('Open administration page')?>"
+                  @click="openAdminPage"/>
+    </div>
     <div class="bbn-100 bbn-alt-background">
       <bbn-splitter orientation="auto">
         <bbn-pane v-if="administeredRooms.length"

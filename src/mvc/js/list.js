@@ -84,6 +84,11 @@
               userInfo: {
                 email: appui.app.user.email,
                 displayName: appui.app.user.name
+              },
+              configOverwrite: {
+                requireDisplayName: true,
+                defaultRemoteDisplayName: bbn._('External user'),
+                defaultLocalDisplayName: bbn._('me')
               }
             };
             if (this.currentToken) {
@@ -92,7 +97,8 @@
             this.currentMeeting = new JitsiMeetExternalAPI(this.currentServer, opt);
             this.currentMeeting.addListener('videoConferenceLeft', this._onVideoConferenceLeft);
             this.currentMeeting.addListener('videoConferenceJoined', this._onVideoConferenceJoined);
-            //this.currentMeeting.addListener('participantJoined', this._onParticipantJoined);
+            this.currentMeeting.addListener('participantJoined', this._onParticipantJoined);
+            this.currentMeeting.addListener('displayNameChange', this._onParticipantJoined);
           });
         }
       },
@@ -121,6 +127,9 @@
       },
       copyExtURL(a){
         navigator.clipboard.writeText(this.currentMeetingExtURL);
+      },
+      openAdminPage(){
+        bbn.fn.link(this.root + 'admin');
       },
       _loadAPI(){
         let script = document.getElementById('appui-meeting-api');
@@ -164,10 +173,6 @@
           idRoom: this.currentRoomID,
           idUser: appui.app.user.id,
           idTmp: this.currentTmp
-        }, d => {
-          if (!d.success) {
-            appui.error();
-          }
         });
         this.post(this.root + 'data/rooms', d => {
           if (d.servers !== undefined) {
@@ -201,6 +206,15 @@
             appui.error();
           }
         })
+      },
+      _onParticipantJoined(ev){
+        if (!!ev.id && !!ev.formattedDisplayName && !!this.currentRoomID) {
+          this.post(this.root + 'actions/name', {
+            idMeeting: this.currentMeetingID,
+            idTmp: ev.id,
+            name: ev.formattedDisplayName
+          });
+        }
       }
     },
     mounted(){
@@ -229,6 +243,16 @@
     },
     beforeDestroy(){
       this.$off('appui-meeting');
+    },
+    watch: {
+      'source.rooms'(newVal){
+        if (this.currentMeetingID) {
+          let r = bbn.fn.getRow(newVal, {liveMeeting: this.currentMeetingID});
+          if (!r) {
+            this._onVideoConferenceLeft();
+          }
+        }
+      }
     }
   }
 })();

@@ -204,18 +204,33 @@
         "defaultExpression": false,
         "maxlength": 255
       },
-      "joined": {
+      "invited": {
         "position": 6,
-        "type": "datetime",
+        "type": "tinyint",
         "null": 0,
+        "key": null,
+        "extra": "",
+        "signed": 0,
+        "virtual": false,
+        "generation": null,
+        "default": 0,
+        "defaultExpression": false,
+        "maxlength": 1
+      },
+      "joined": {
+        "position": 7,
+        "type": "datetime",
+        "null": 1,
         "key": null,
         "extra": "",
         "signed": 1,
         "virtual": false,
-        "generation": null
+        "generation": null,
+        "default": "NULL",
+        "defaultExpression": false
       },
       "leaved": {
-        "position": 7,
+        "position": 8,
         "type": "datetime",
         "null": 1,
         "key": null,

@@ -16,4 +16,7 @@ if ($ctrl->hasArguments() && \bbn\Str::isUid($ctrl->arguments[0])) {
 $ctrl
   ->setIcon('nf nf-fa-video_camera')
   ->setUrl(APPUI_MEETING_ROOT . 'list')
+  ->addData([
+    'isAdmin' => $ctrl->inc->perm->has($ctrl->inc->perm->is(APPUI_MEETING_ROOT . 'admin'))
+  ])
   ->combo(_('Meeting'), true);
