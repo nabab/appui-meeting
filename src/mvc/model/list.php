@@ -4,6 +4,8 @@ $prefCfg = $model->inc->pref->getClassCfg();
 $meeting = new \bbn\Appui\Meeting($model->db);
 $meetingCfg = $meeting->getClassCfg();
 return \bbn\X::mergeArrays([
+  'idMeeting' => $model->data['idMeeting'] ?? false,
+  'idRoom' => $model->data['idRoom'] ?? false,
   'usersCfg' => $userCfg['arch']['users'],
   'groupsCfg' => $userCfg['arch']['groups'],
   'prefCfg' => $prefCfg['arch']['user_options'],

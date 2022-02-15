@@ -4,6 +4,7 @@
       return {
         currentMeeting: false,
         currentMeetingID: false,
+        currentMeetingURL: false,
         currentMeetingExtURL: false,
         currentRoomID: false,
         currentRoom: false,
@@ -47,7 +48,6 @@
           this.currentServer = bbn.fn.getField(this.source.servers, 'code', {value: meet[this.source.prefCfg.id_option]});
           this.currentRoomID = meet.id;
           this.currentRoom = meet[this.source.prefCfg.text];
-          this.currentMeetingExtURL = `https://${this.currentServer}/${this.currentRoom}`;
           this.currentToken = false;
           if (!!this.currentServer) {
             if (meet.moderators.includes(appui.app.user.id)) {
@@ -78,7 +78,6 @@
           this.$nextTick(() => {
             let opt = {
               roomName: this.currentRoom,
-              confID:'123456',
               width: '100%',
               height: '100%',
               parentNode: this.getRef('meetContainer'),
@@ -94,7 +93,6 @@
             this.currentMeeting.addListener('videoConferenceLeft', this._onVideoConferenceLeft);
             this.currentMeeting.addListener('videoConferenceJoined', this._onVideoConferenceJoined);
             //this.currentMeeting.addListener('participantJoined', this._onParticipantJoined);
-            this.currentMeeting.addListener('dataChannelOpened', (a, b) => {bbn.fn.log('MIRKO', a, b)});
           });
         }
       },
@@ -118,8 +116,11 @@
           }
         }
       },
-      copyURL(){
-
+      copyURL(a){
+        navigator.clipboard.writeText(this.currentMeetingURL);
+      },
+      copyExtURL(a){
+        navigator.clipboard.writeText(this.currentMeetingExtURL);
       },
       _loadAPI(){
         let script = document.getElementById('appui-meeting-api');
@@ -142,6 +143,20 @@
       _onAPILoadError(ev){
         this.APILoadError = true;
         this.APILoaded = false;
+      },
+      _setURL(){
+        if (!!this.currentMeetingID) {
+          this.currentMeetingURL = bbn.env.root + this.root + 'list/' + this.currentMeetingID;
+          bbn.fn.setNavigationVars(this.currentMeetingURL);
+        }
+        if (!!this.currentServer && !!this.currentRoom) {
+          this.currentMeetingExtURL = `https://${this.currentServer}/${this.currentRoom}`;
+        }
+      },
+      _unsetURL(){
+        this.currentMeetingURL = false;
+        this.currentMeetingExtURL = false;
+        bbn.fn.setNavigationVars(this.root + 'list');
       },
       _onVideoConferenceLeft(ev){
         this.currentMeeting.dispose();
@@ -168,6 +183,7 @@
         this.currentRoomID = false;
         this.currentRoom = false;
         this.currentTmp = false;
+        this._unsetURL();
       },
       _onVideoConferenceJoined(ev){
         this.currentTmp = ev.id;
@@ -178,6 +194,7 @@
         }, d => {
           if (d.success && !!d.idMeeting) {
             this.currentMeetingID = d.idMeeting;
+            this._setURL();
           }
           else {
             this._onVideoConferenceLeft();
@@ -202,6 +219,12 @@
         });
         appui.poll();
         this.ready = true;
+        if (!!this.source.idMeeting && !!this.source.idRoom) {
+          let meet = bbn.fn.getRow(this.source.rooms, {id: this.source.idRoom});
+          if (meet && (meet['liveMeeting'] === this.source.idMeeting)) {
+            this.joinMeet(meet);
+          }
+        }
       })
     },
     beforeDestroy(){

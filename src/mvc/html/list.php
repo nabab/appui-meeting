@@ -8,12 +8,22 @@
         <?=_('Invite user(s)')?>
       </bbn-button>
       <div class="bbn-flex-fill bbn-r">
-        <span><?=_('External URL')?>: </span>
-        <bbn-input :value="currentMeetingExtURL"
-                   :readonly="true"
-                   class="appui-meeting-toolbar-url"
-                   button-right="nf nf-mdi-content_copy"
-                   @clickRightButton="copyURL"/>
+        <template v-if="currentMeetingURL">
+          <span><?=_('URL')?>: </span>
+          <bbn-input :value="currentMeetingURL"
+                     :readonly="true"
+                     class="appui-meeting-toolbar-url bbn-right-space"
+                     button-right="nf nf-mdi-content_copy"
+                     @clickRightButton="copyURL"/>
+        </template>
+        <template v-if="currentMeetingExtURL">
+          <span><?=_('External URL')?>: </span>
+          <bbn-input :value="currentMeetingExtURL"
+                     :readonly="true"
+                     class="appui-meeting-toolbar-url"
+                     button-right="nf nf-mdi-content_copy"
+                     @clickRightButton="copyExtURL"/>
+        </template>
       </div>
     </div>
     <div class="bbn-flex-fill"
