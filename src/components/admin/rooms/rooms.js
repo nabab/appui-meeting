@@ -9,14 +9,23 @@
     },
     data(){
       return {
-        currentServer: ''
+        currentServer: '',
+        ready: false
       }
     },
     methods: {
       onServerChanged(server){
         this.currentServer = server;
         this.$nextTick(() => {
-          this.getRef('table').updateData();
+          if (this.ready) {
+            let table = this.getRef('table');
+            if (table && !table.isLoading && !!table.isLoaded) {
+              table.updateData();
+            }
+          }
+          else {
+            this.ready = true;
+          }
         });
       },
       addRoom(){

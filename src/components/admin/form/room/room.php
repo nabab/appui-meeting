@@ -10,7 +10,8 @@
     <label class="bbn-label"><?=_('Name')?></label>
     <bbn-input v-model="source[prefCfg.text]"
                :required="true"
-               pattern="[a-zA-Z0-9\-\_]*$"/>
+               pattern="^[a-zA-Z0-9-_]*$"
+               title="<?=_('You can only use letters, numbers, dashes and underscores')?>"/>
     <template v-if="type === 'groups'">
       <label class="bbn-label"><?=_('Group')?></label>
       <div>

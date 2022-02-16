@@ -10,7 +10,7 @@
               }"
               :pageable="true"
               ref="table"
-              v-if="currentServer">
+              v-if="ready">
       <bbns-column :field="prefCfg.text"
                    title="<?=_('Name')?>"/>
       <bbns-column :field="prefCfg.id_group"
