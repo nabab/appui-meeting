@@ -41,7 +41,7 @@ if ($model->hasData('data', true) && !empty($model->data['data']['idRoom'])) {
           'table' => $partsTable,
           'fields' => [
             $partsFields['id_user'],
-            $partsFields['name']
+            $partsFields['name'] => 'IF(ISNULL(' . $partsFields['id_user'] . '), CONCAT(' . $partsFields['name'] . ', " (External)"),' . $partsFields['name'] . ')'
           ],
           'where' => [
             'conditions' => [[
