@@ -89,6 +89,9 @@
                 requireDisplayName: true,
                 defaultRemoteDisplayName: bbn._('External user'),
                 defaultLocalDisplayName: bbn._('me')
+              },
+              interfaceConfigOverwrite: {
+                VIDEO_LAYOUT_FIT: 'nocrop'
               }
             };
             if (this.currentToken) {
@@ -217,6 +220,9 @@
         }
       }
     },
+    beforeMount(){
+      appui.register('appui-meeting', this);
+    },
     mounted(){
       this.$nextTick(() => {
         appui.$on('appui-meeting', (type, data) => {
@@ -243,6 +249,7 @@
     },
     beforeDestroy(){
       this.$off('appui-meeting');
+      appui.unregister('appui-meeting');
     },
     watch: {
       'source.rooms'(newVal){

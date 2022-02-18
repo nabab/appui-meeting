@@ -52,12 +52,6 @@
               <bbn-scroll>
                 <bbn-list :source="administeredRooms"
                           component="appui-meeting-room"
-                          :componentOptions="{
-                            usersCfg: source.usersCfg,
-                            groupsCfg: source.groupsCfg,
-                            prefCfg: source.prefCfg,
-                            participantsCfg: source.participantsCfg
-                          }"
                           :alternate-background="true"
                           @joinMeet="joinMeet"/>
               </bbn-scroll>
@@ -75,12 +69,6 @@
                 <div v-if="invitedRooms.length">
                   <bbn-list :source="invitedRooms"
                             component="appui-meeting-room"
-                            :componentOptions="{
-                              usersCfg: source.usersCfg,
-                              groupsCfg: source.groupsCfg,
-                              prefCfg: source.prefCfg,
-                              participantsCfg: source.participantsCfg
-                            }"
                             :alternate-background="true"
                             @joinMeet="joinMeet"/>
                   <div class="bbn-header bbn-b bbn-upper bbn-padded bbn-radius-top bbn-no-border bbn-tertiary-text-alt bbn-lg">
@@ -89,12 +77,6 @@
                 </div>
                 <bbn-list :source="yourRooms"
                           component="appui-meeting-room"
-                          :componentOptions="{
-                            usersCfg: source.usersCfg,
-                            groupsCfg: source.groupsCfg,
-                            prefCfg: source.prefCfg,
-                            participantsCfg: source.participantsCfg
-                          }"
                           :alternate-background="true"
                           @joinMeet="joinMeet"/>
               </bbn-scroll>

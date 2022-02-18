@@ -3,52 +3,69 @@ if (!empty($model->data['data']['server'])
   && !empty($model->data['data']['type'])
 ) {
   $meeting = new \bbn\Appui\Meeting($model->db);
+  $meetingCfg = $meeting->getClassCfg();
+  $meetingTable = $meetingCfg['tables']['meetings'];
+  $meetingFields = $meetingCfg['arch']['meetings'];
   $prefCfg = $model->inc->pref->getClassCfg();
+  $prefTable = $prefCfg['table'];
   $prefFields = $prefCfg['arch']['user_options'];
   $filters = [
     'conditions' => [[
-      'field' => $prefFields['id_option'],
+      'field' => $model->db->cfn($prefFields['id_option'], $prefTable),
       'value' => $model->data['data']['server']
     ], [
-      'field' => $prefFields['id_alias'],
+      'field' => $model->db->cfn($prefFields['id_alias'], $prefTable),
       'operator' => 'isnull'
     ]]
   ];
   switch ($model->data['data']['type']) {
     case 'public':
       $filters['conditions'][] = [
-        'field' => $prefFields['public'],
+        'field' => $model->db->cfn($prefFields['public'], $prefTable),
         'value' => 1
       ];
       break;
     case 'users':
       $filters['conditions'][] = [
-        'field' => $prefFields['id_user'],
+        'field' => $model->db->cfn($prefFields['id_user'], $prefTable),
         'operator' => 'isnotnull'
       ];
       break;
     case 'groups':
       $filters['conditions'][] = [
-        'field' => $prefFields['id_group'],
+        'field' => $model->db->cfn($prefFields['id_group'], $prefTable),
         'operator' => 'isnotnull'
       ];
       break;
   }
+  $s = $model->db->cfn($meetingFields['started'], $meetingTable);
+  $e = $model->db->cfn($meetingFields['ended'], $meetingTable);
   $grid = new \bbn\Appui\Grid($model->db, $model->data, [
-    'table' => $prefCfg['table'],
+    'table' => $prefTable,
     'fields' => [
-      $prefFields['id'],
-      $prefFields['text'],
-      $prefFields['public'],
-      $prefFields['id_user'],
-      $prefFields['id_group'],
-      'created' => 'JSON_UNQUOTE(JSON_EXTRACT('.$prefFields['cfg'].', "$.created"))',
-      'last_use' => 'JSON_UNQUOTE(JSON_EXTRACT('.$prefFields['cfg'].', "$.last_use"))',
-      'last_duration' => 'JSON_UNQUOTE(JSON_EXTRACT('.$prefFields['cfg'].', "$.last_duration"))',
+      $model->db->cfn($prefFields['id'], $prefTable),
+      $model->db->cfn($prefFields['text'], $prefTable),
+      $model->db->cfn($prefFields['public'], $prefTable),
+      $model->db->cfn($prefFields['id_user'], $prefTable),
+      $model->db->cfn($prefFields['id_group'], $prefTable),
+      'created' => 'JSON_UNQUOTE(JSON_EXTRACT(' . $model->db->cfn($prefFields['cfg'], $prefTable) . ', "$.created"))',
+      'last_use' => 'MAX(' . $s . ')',
+      'last_duration' => 'SEC_TO_TIME(TIMESTAMPDIFF(SECOND,' . $s . ', ' . $e . '))',
     ],
+    'join' => [[
+      'table' => $meetingTable,
+      'type' => 'left',
+      'on' => [
+        'conditions' => [[
+          'field' => $model->db->cfn($prefFields['id'], $prefTable),
+          'exp' => $model->db->cfn($meetingFields['id_room'], $meetingTable)
+        ]]
+      ]
+    ]],
     'filters' => $filters,
+    'group_by' => [$model->db->cfn($prefFields['id'], $prefTable)],
     'order' => [[
-      'field' => $prefFields['text'],
+      'field' => $model->db->cfn($prefFields['text'], $prefTable),
       'dir' => 'ASC'
     ]]
   ]);

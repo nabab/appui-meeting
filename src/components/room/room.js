@@ -4,25 +4,26 @@
       source: {
         type: Object,
         required: true
-      },
-      usersCfg: {
-        type: Object,
-        required: true
-      },
-      groupsCfg: {
-        type: Object,
-        required: true
-      },
-      prefCfg: {
-        type: Object,
-        required: true
-      },
-      participantsCfg: {
-        type: Object,
-        required: true
+      }
+    },
+    data(){
+      return {
+        meeting: appui.getRegistered('appui-meeting')
       }
     },
     computed: {
+      usersCfg(){
+        return this.meeting ? this.meeting.source.usersCfg : {}
+      },
+      groupsCfg(){
+        return this.meeting ? this.meeting.source.groupsCfg : {}
+      },
+      prefCfg(){
+        return this.meeting ? this.meeting.source.prefCfg : {}
+      },
+      participantsCfg(){
+        return this.meeting ? this.meeting.source.participantsCfg : {}
+      },
       administered(){
         return this.source
           && this.source.moderators
@@ -82,9 +83,13 @@
 
       },
       openReports(){
-        /* this.getPopup().open({
-
-        }); */
+        this.getPopup().open({
+          title: bbn._('Logs') + ' - ' + this.source[this.prefCfg.text],
+          component: 'appui-meeting-logs',
+          source: this.source[this.prefCfg.id],
+          width: '90%',
+          height: '90%'
+        });
       }
     }
   }

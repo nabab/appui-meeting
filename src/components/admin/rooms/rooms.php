@@ -21,18 +21,20 @@
       <bbns-column field="created"
                    title="<?=_('Created')?>"
                    :render="renderDate"
-                   :width="120"/>
+                   :width="120"
+                   cls="bbn-c"/>
       <bbns-column field="moderators"
                    title="<?=_('Moderators')?>"
                    :render="renderModerators"/>
       <bbns-column field="last_use"
                    title="<?=_('Last use')?>"
                    :render="renderDate"
-                   :width="120"/>
+                   :width="120"
+                   cls="bbn-c"/>
       <bbns-column field="last_duration"
                    title="<?=_('Last duration')?>"
-                   :render="renderDuration"
-                   :width="120"/>
+                   :width="120"
+                   cls="bbn-c"/>
       <bbns-column :buttons="[{
                      text: _('Edit'),
                      icon: 'nf nf-fa-edit',

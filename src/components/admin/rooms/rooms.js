@@ -117,9 +117,6 @@
           return bbn.fn.getField(appui.app.groups, this.groupsCfg.group, {[this.groupsCfg.id]: row[this.prefCfg['id_group']]});
         }
         return '';
-      },
-      renderDuration(row){
-        return '';
       }
     }
   };
