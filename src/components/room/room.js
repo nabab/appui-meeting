@@ -80,7 +80,16 @@
         this.closest('bbn-list').$emit('joinMeet', this.source);
       },
       stopMeet(){
-
+        if (this.source[this.prefCfg.id]) {
+          this.post(this.root + 'actions/stop', {idRoom: this.source[this.prefCfg.id]}, d => {
+            if (d.success) {
+              appui.success();
+            }
+            else {
+              appui.error();
+            }
+          })
+        }
       },
       openReports(){
         this.getPopup().open({
