@@ -1,0 +1,1 @@
+<appui-meeting-admin :source="source"></appui-meeting-admin>
