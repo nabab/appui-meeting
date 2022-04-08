@@ -36,7 +36,6 @@
     },
     "fields": {
       "id": {
-        "position": 1,
         "type": "binary",
         "null": 0,
         "key": "PRI",
@@ -47,7 +46,6 @@
         "maxlength": 16
       },
       "id_room": {
-        "position": 2,
         "type": "binary",
         "null": 0,
         "key": "MUL",
@@ -58,7 +56,6 @@
         "maxlength": 16
       },
       "id_tmp": {
-        "position": 3,
         "type": "varchar",
         "null": 1,
         "key": null,
@@ -71,7 +68,6 @@
         "maxlength": 30
       },
       "started": {
-        "position": 4,
         "type": "datetime",
         "null": 0,
         "key": null,
@@ -81,7 +77,6 @@
         "generation": null
       },
       "ended": {
-        "position": 5,
         "type": "datetime",
         "null": 1,
         "key": null,
@@ -146,7 +141,6 @@
     },
     "fields": {
       "id": {
-        "position": 1,
         "type": "binary",
         "null": 0,
         "key": "PRI",
@@ -157,7 +151,6 @@
         "maxlength": 16
       },
       "id_meeting": {
-        "position": 2,
         "type": "binary",
         "null": 0,
         "key": "MUL",
@@ -168,7 +161,6 @@
         "maxlength": 16
       },
       "id_tmp": {
-        "position": 3,
         "type": "varchar",
         "null": 0,
         "key": null,
@@ -179,7 +171,6 @@
         "maxlength": 30
       },
       "id_user": {
-        "position": 4,
         "type": "binary",
         "null": 1,
         "key": "MUL",
@@ -192,7 +183,6 @@
         "maxlength": 16
       },
       "name": {
-        "position": 5,
         "type": "varchar",
         "null": 1,
         "key": null,
@@ -205,7 +195,6 @@
         "maxlength": 255
       },
       "invited": {
-        "position": 6,
         "type": "tinyint",
         "null": 0,
         "key": null,
@@ -218,7 +207,6 @@
         "maxlength": 1
       },
       "joined": {
-        "position": 7,
         "type": "datetime",
         "null": 1,
         "key": null,
@@ -230,7 +218,6 @@
         "defaultExpression": false
       },
       "leaved": {
-        "position": 8,
         "type": "datetime",
         "null": 1,
         "key": null,
