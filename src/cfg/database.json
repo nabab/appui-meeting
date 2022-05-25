@@ -5,19 +5,12 @@
         "columns": [
           "id"
         ],
-        "ref_db": null,
-        "ref_table": null,
-        "ref_column": null,
-        "constraint": null,
-        "update": null,
-        "delete": null,
         "unique": 1
       },
       "id_room": {
         "columns": [
           "id_room"
         ],
-        "ref_db": null,
         "ref_table": "bbn_users_options",
         "ref_column": "id",
         "constraint": "bbn_meetings_ibfk_1",
@@ -39,9 +32,7 @@
         "type": "binary",
         "null": 0,
         "key": "PRI",
-        "extra": "",
         "signed": 1,
-        "virtual": false,
         "generation": null,
         "maxlength": 16
       },
@@ -49,19 +40,14 @@
         "type": "binary",
         "null": 0,
         "key": "MUL",
-        "extra": "",
         "signed": 1,
-        "virtual": false,
         "generation": null,
         "maxlength": 16
       },
       "id_tmp": {
         "type": "varchar",
         "null": 1,
-        "key": null,
-        "extra": "",
         "signed": 1,
-        "virtual": false,
         "generation": null,
         "default": "NULL",
         "defaultExpression": false,
@@ -70,19 +56,13 @@
       "started": {
         "type": "datetime",
         "null": 0,
-        "key": null,
-        "extra": "",
         "signed": 1,
-        "virtual": false,
         "generation": null
       },
       "ended": {
         "type": "datetime",
         "null": 1,
-        "key": null,
-        "extra": "",
         "signed": 1,
-        "virtual": false,
         "generation": null,
         "default": "NULL",
         "defaultExpression": false
@@ -95,19 +75,12 @@
         "columns": [
           "id"
         ],
-        "ref_db": null,
-        "ref_table": null,
-        "ref_column": null,
-        "constraint": null,
-        "update": null,
-        "delete": null,
         "unique": 1
       },
       "id_user": {
         "columns": [
           "id_user"
         ],
-        "ref_db": null,
         "ref_table": "bbn_users",
         "ref_column": "id",
         "constraint": "bbn_meetings_participants_ibfk_2",
@@ -119,7 +92,6 @@
         "columns": [
           "id_meeting"
         ],
-        "ref_db": null,
         "ref_table": "bbn_meetings",
         "ref_column": "id",
         "constraint": "bbn_meetings_participants_ibfk_1",
@@ -144,9 +116,7 @@
         "type": "binary",
         "null": 0,
         "key": "PRI",
-        "extra": "",
         "signed": 1,
-        "virtual": false,
         "generation": null,
         "maxlength": 16
       },
@@ -154,19 +124,14 @@
         "type": "binary",
         "null": 0,
         "key": "MUL",
-        "extra": "",
         "signed": 1,
-        "virtual": false,
         "generation": null,
         "maxlength": 16
       },
       "id_tmp": {
         "type": "varchar",
         "null": 0,
-        "key": null,
-        "extra": "",
         "signed": 1,
-        "virtual": false,
         "generation": null,
         "maxlength": 30
       },
@@ -174,9 +139,7 @@
         "type": "binary",
         "null": 1,
         "key": "MUL",
-        "extra": "",
         "signed": 1,
-        "virtual": false,
         "generation": null,
         "default": "NULL",
         "defaultExpression": false,
@@ -185,10 +148,7 @@
       "name": {
         "type": "varchar",
         "null": 1,
-        "key": null,
-        "extra": "",
         "signed": 1,
-        "virtual": false,
         "generation": null,
         "default": "NULL",
         "defaultExpression": false,
@@ -197,10 +157,7 @@
       "invited": {
         "type": "tinyint",
         "null": 0,
-        "key": null,
-        "extra": "",
         "signed": 0,
-        "virtual": false,
         "generation": null,
         "default": 0,
         "defaultExpression": false,
@@ -209,10 +166,7 @@
       "joined": {
         "type": "datetime",
         "null": 1,
-        "key": null,
-        "extra": "",
         "signed": 1,
-        "virtual": false,
         "generation": null,
         "default": "NULL",
         "defaultExpression": false
@@ -220,10 +174,7 @@
       "leaved": {
         "type": "datetime",
         "null": 1,
-        "key": null,
-        "extra": "",
         "signed": 1,
-        "virtual": false,
         "generation": null,
         "default": "NULL",
         "defaultExpression": false
