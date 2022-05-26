@@ -33,7 +33,6 @@
         "null": 0,
         "key": "PRI",
         "signed": 1,
-        "generation": null,
         "maxlength": 16
       },
       "id_room": {
@@ -41,31 +40,27 @@
         "null": 0,
         "key": "MUL",
         "signed": 1,
-        "generation": null,
         "maxlength": 16
       },
       "id_tmp": {
         "type": "varchar",
         "null": 1,
         "signed": 1,
-        "generation": null,
         "default": "NULL",
-        "defaultExpression": false,
+        "defaultExpression": 1,
         "maxlength": 30
       },
       "started": {
         "type": "datetime",
         "null": 0,
-        "signed": 1,
-        "generation": null
+        "signed": 1
       },
       "ended": {
         "type": "datetime",
         "null": 1,
         "signed": 1,
-        "generation": null,
         "default": "NULL",
-        "defaultExpression": false
+        "defaultExpression": 1
       }
     }
   },
@@ -117,7 +112,6 @@
         "null": 0,
         "key": "PRI",
         "signed": 1,
-        "generation": null,
         "maxlength": 16
       },
       "id_meeting": {
@@ -125,14 +119,12 @@
         "null": 0,
         "key": "MUL",
         "signed": 1,
-        "generation": null,
         "maxlength": 16
       },
       "id_tmp": {
         "type": "varchar",
         "null": 0,
         "signed": 1,
-        "generation": null,
         "maxlength": 30
       },
       "id_user": {
@@ -140,25 +132,22 @@
         "null": 1,
         "key": "MUL",
         "signed": 1,
-        "generation": null,
         "default": "NULL",
-        "defaultExpression": false,
+        "defaultExpression": 1,
         "maxlength": 16
       },
       "name": {
         "type": "varchar",
         "null": 1,
         "signed": 1,
-        "generation": null,
         "default": "NULL",
-        "defaultExpression": false,
+        "defaultExpression": 1,
         "maxlength": 255
       },
       "invited": {
         "type": "tinyint",
         "null": 0,
         "signed": 0,
-        "generation": null,
         "default": 0,
         "defaultExpression": false,
         "maxlength": 1
@@ -167,17 +156,15 @@
         "type": "datetime",
         "null": 1,
         "signed": 1,
-        "generation": null,
         "default": "NULL",
-        "defaultExpression": false
+        "defaultExpression": 1
       },
       "leaved": {
         "type": "datetime",
         "null": 1,
         "signed": 1,
-        "generation": null,
         "default": "NULL",
-        "defaultExpression": false
+        "defaultExpression": 1
       }
     }
   }
