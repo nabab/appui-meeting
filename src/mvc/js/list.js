@@ -44,6 +44,7 @@
       joinMeet(meet){
         this.APILoaded = false;
         this.APILoadError = false;
+        bbn.fn.log('mirko', !!meet.id, !!meet[this.source.prefCfg.id_option], !!meet[this.source.prefCfg.text])
         if (!!meet.id && !!meet[this.source.prefCfg.id_option] && !!meet[this.source.prefCfg.text]) {
           this.currentServer = bbn.fn.getField(this.source.servers, 'code', {value: meet[this.source.prefCfg.id_option]});
           this.currentRoomID = meet.id;
