@@ -15,7 +15,11 @@
     {
       "text": "List",
       "code": "list",
-      "icon": "nf nf-fa-server"
+      "icon": "nf nf-fa-server",
+      "cfg": {
+        "show_code": 1,
+        "allow_children": 1
+      }
     }
   ]
 }
