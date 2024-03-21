@@ -10,17 +10,17 @@
       <div v-if="lastUse"
            class="bbn-s bbn-top-sspace">
         <i class="nf nf-mdi-calendar_clock"
-           title="<?=_('Last use')?>"/>
+           title="<?= _('Last use') ?>"/>
         <span v-text="lastUse"></span>
       </div>
     </div>
   </div>
   <div class="bbn-middle bbn-upper bbn-hpadded bbn-b appui-meeting-room-live"
-       v-if="!!source.live"><?=_('LIVE')?></div>
+       v-if="!!source.live"><?= _('LIVE') ?></div>
   <div class="bbn-hpadded">
     <div class="bbn-upper bbn-xs"
          :title="moderators">
-      <?=_('Administrators')?>
+      <?= _('Administrators') ?>
     </div>
     <div class="bbn-middle"
          :title="moderators">
@@ -31,7 +31,7 @@
   <div class="bbn-hpadded">
     <div class="bbn-upper bbn-xs"
          :title="participants">
-      <?=_('Participants')?>
+      <?= _('Participants') ?>
     </div>
     <div class="bbn-middle"
          :title="participants">
@@ -44,8 +44,8 @@
          'bbn-tertiary-text-alt': !administered
        }]"
        @click="joinMeet">
-    <span v-if="!administered || !!source.participants.length"><?=_('JOIN')?></span>
-    <span v-else><?=_('START')?></span>
+    <span v-if="!administered || !!source.participants.length"><?= _('JOIN') ?></span>
+    <span v-else><?= _('START') ?></span>
   </div>
   <bbn-context v-if="!!administered"
                class="bbn-middle bbn-p"
