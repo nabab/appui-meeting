@@ -35,7 +35,7 @@
         if (row.participants && row.participants.length) {
           bbn.fn.each(row.participants, p => {
             if (!!p[this.participantsCfg.id_user]) {
-              res.push(appui.app.getUserName(p[this.participantsCfg.id_user]));
+              res.push(appui.getUserName(p[this.participantsCfg.id_user]));
             }
             else if (!!p[this.participantsCfg.name] && p[this.participantsCfg.name].length) {
               res.push(p[this.participantsCfg.name]);

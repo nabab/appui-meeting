@@ -20,7 +20,7 @@
     computed: {
       administeredRooms(){
         if (this.source.rooms && this.source.rooms.length) {
-          return bbn.fn.filter(this.source.rooms, room => room.moderators.includes(appui.app.user.id));
+          return bbn.fn.filter(this.source.rooms, room => room.moderators.includes(appui.user.id));
         }
         return [];
       },
@@ -28,14 +28,14 @@
         if (this.source.rooms && this.source.rooms.length) {
           return bbn.fn.filter(
             this.source.rooms,
-            room => (!room.moderators.includes(appui.app.user.id) && !room.invited.includes(appui.app.user.id))
+            room => (!room.moderators.includes(appui.user.id) && !room.invited.includes(appui.user.id))
           );
         }
         return [];
       },
       invitedRooms(){
         if (this.source.rooms && this.source.rooms.length) {
-          return bbn.fn.filter(this.source.rooms, room => room.invited.includes(appui.app.user.id));
+          return bbn.fn.filter(this.source.rooms, room => room.invited.includes(appui.user.id));
         }
         return [];
       },
@@ -50,10 +50,10 @@
           this.currentRoom = meet[this.source.prefCfg.text];
           this.currentToken = false;
           if (!!this.currentServer) {
-            if (meet.moderators.includes(appui.app.user.id)) {
+            if (meet.moderators.includes(appui.user.id)) {
               this.post(this.root + 'actions/token', {
                 idRoom: meet.id,
-                idUser: appui.app.user.id
+                idUser: appui.user.id
               }, d => {
                 if (d.success && d.token) {
                   this.currentToken = d.token;
@@ -82,8 +82,8 @@
               height: '100%',
               parentNode: this.getRef('meetContainer'),
               userInfo: {
-                email: appui.app.user.email,
-                displayName: appui.app.user.name
+                email: appui.user.email,
+                displayName: appui.user.name
               },
               configOverwrite: {
                 requireDisplayName: true,
@@ -174,7 +174,7 @@
         this.currentMeeting.dispose();
         this.post(this.root + 'actions/leaved', {
           idRoom: this.currentRoomID,
-          idUser: appui.app.user.id,
+          idUser: appui.user.id,
           idTmp: this.currentTmp
         });
         this.post(this.root + 'data/rooms', d => {
@@ -197,7 +197,7 @@
         this.currentTmp = ev.id;
         this.post(this.root + 'actions/joined', {
           idRoom: this.currentRoomID,
-          idUser: appui.app.user.id,
+          idUser: appui.user.id,
           idTmp: ev.id
         }, d => {
           if (d.success && !!d.idMeeting) {

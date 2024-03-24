@@ -105,7 +105,7 @@
         if (row.moderators && row.moderators.length) {
           let r = '<div>';
           bbn.fn.each(row.moderators, (m, i) => {
-            r += appui.app.getUserName(m) + (!!row.moderators[i+1] ? '<br>' : '');
+            r += appui.getUserName(m) + (!!row.moderators[i+1] ? '<br>' : '');
           });
           return r + '</div>';
 
@@ -114,7 +114,7 @@
       },
       renderGroup(row){
         if (row[this.prefCfg['id_group']]) {
-          return bbn.fn.getField(appui.app.groups, this.groupsCfg.group, {[this.groupsCfg.id]: row[this.prefCfg['id_group']]});
+          return bbn.fn.getField(appui.groups, this.groupsCfg.group, {[this.groupsCfg.id]: row[this.prefCfg['id_group']]});
         }
         return '';
       }

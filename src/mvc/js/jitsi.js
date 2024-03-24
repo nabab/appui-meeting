@@ -18,9 +18,9 @@
             SHOW_WATERMARK_FOR_GUESTS: false,
             JITSI_WATERMARK_LINK: '',
             userInfo: {
-              email: appui.app.user.email,
-              name: appui.app.user.name,
-              nick: appui.app.user.name.indexOf(' ') ? appui.app.user.name.split(' ')[0] : appui.app.user.name
+              email: appui.user.email,
+              name: appui.user.name,
+              nick: appui.user.name.indexOf(' ') ? appui.user.name.split(' ')[0] : appui.user.name
             }
           }
         };

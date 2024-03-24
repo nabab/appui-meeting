@@ -27,7 +27,7 @@
         return appui.app.getActiveUsers();
       },
       groups(){
-        return appui.app.groups;
+        return appui.groups;
       }
     },
     methods: {

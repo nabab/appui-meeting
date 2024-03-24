@@ -27,12 +27,12 @@
       administered(){
         return this.source
           && this.source.moderators
-          && this.source.moderators.includes(appui.app.user.id);
+          && this.source.moderators.includes(appui.user.id);
       },
       moderators(){
         let ret = '';
         if (this.source.moderators && this.source.moderators.length) {
-          ret = bbn.fn.map(this.source.moderators, m => appui.app.getUserName(m)).sort().join("\n");
+          ret = bbn.fn.map(this.source.moderators, m => appui.getUserName(m)).sort().join("\n");
         }
         return ret;
       },
@@ -42,7 +42,7 @@
           let i = 1;
           ret = bbn.fn.map(this.source.participants, m => {
             if (!!m[this.participantsCfg.id_user]) {
-              return appui.app.getUserName(m[this.participantsCfg.id_user])
+              return appui.getUserName(m[this.participantsCfg.id_user])
             }
             if (!!m[this.participantsCfg.name]) {
               return m[this.participantsCfg.name];
