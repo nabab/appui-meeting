@@ -9,7 +9,7 @@
                   }"
                   :load="false"
                   title="<?= _('Public rooms') ?>"
-                  :static="true"/>
+                  :fixed="true"/>
   <bbns-container url="private"
                   component="appui-meeting-admin-rooms"
                   :options="{
@@ -17,7 +17,7 @@
                   }"
                   :load="false"
                   title="<?= _('Private users rooms') ?>"
-                  :static="true"/>
+                  :fixed="true"/>
   <bbns-container url="groups"
                   component="appui-meeting-admin-rooms"
                   :options="{
@@ -25,5 +25,5 @@
                   }"
                   :load="false"
                   title="<?= _('Private groups rooms') ?>"
-                  :static="true"/>
+                  :fixed="true"/>
 </bbn-router>
