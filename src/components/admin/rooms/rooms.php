@@ -1,9 +1,9 @@
 <div class="appui-meeting-admin-public bbn-overlay bbn-flex-height">
-  <appui-meeting-admin-toolbar @serverChanged="onServerChanged"
-                               @addRoom="addRoom"/>
+  <appui-meeting-admin-toolbar @serverchanged="onServerChanged"
+                               @addroom="addRoom"/>
   <div class="bbn-flex-fill">
     <bbn-table :source="root + 'data/admin/rooms'"
-              @serverChanged="onServerChanged"
+              @serverchanged="onServerChanged"
               :data="{
                 server: currentServer,
                 type: type

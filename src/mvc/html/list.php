@@ -14,7 +14,7 @@
                      :readonly="true"
                      class="appui-meeting-toolbar-url bbn-right-space"
                      button-right="nf nf-mdi-content_copy"
-                     @clickRightButton="copyURL"/>
+                     @clickrightbutton="copyURL"/>
         </template>
         <template v-if="currentMeetingExtURL">
           <span><?= _('External URL') ?>: </span>
@@ -22,7 +22,7 @@
                      :readonly="true"
                      class="appui-meeting-toolbar-url"
                      button-right="nf nf-mdi-content_copy"
-                     @clickRightButton="copyExtURL"/>
+                     @clickrightbutton="copyExtURL"/>
         </template>
       </div>
     </div>
@@ -53,7 +53,7 @@
                 <bbn-list :source="administeredRooms"
                           component="appui-meeting-room"
                           :alternate-background="true"
-                          @joinMeet="joinMeet"/>
+                          @joinmeet="joinMeet"/>
               </bbn-scroll>
             </div>
           </div>
@@ -70,7 +70,7 @@
                   <bbn-list :source="invitedRooms"
                             component="appui-meeting-room"
                             :alternate-background="true"
-                            @joinMeet="joinMeet"/>
+                            @joinmeet="joinMeet"/>
                   <div class="bbn-header bbn-b bbn-upper bbn-padded bbn-radius-top bbn-no-border bbn-tertiary-text-alt bbn-lg">
                     <?= _('Your rooms') ?>
                   </div>
@@ -78,7 +78,7 @@
                 <bbn-list :source="yourRooms"
                           component="appui-meeting-room"
                           :alternate-background="true"
-                          @joinMeet="joinMeet"/>
+                          @joinmeet="joinMeet"/>
               </bbn-scroll>
             </div>
           </div>

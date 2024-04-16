@@ -1,7 +1,7 @@
 <div class="appui-meeting-admin-toolbar bbn-flex-width bbn-header bbn-spadded">
   <div class="bbn-flex-fill">
     <bbn-button icon="nf nf-fa-plus"
-                @click="$emit('addRoom')"><?= _('Add') ?></bbn-button>
+                @click="$emit('addroom')"><?= _('Add') ?></bbn-button>
   </div>
   <div class="bbn-vmiddle">
     <span class="bbn-right-sspace"><?= _('Server') ?>:</span>

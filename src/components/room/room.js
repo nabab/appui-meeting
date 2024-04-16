@@ -77,7 +77,7 @@
     },
     methods: {
       joinMeet(){
-        this.closest('bbn-list').$emit('joinMeet', this.source);
+        this.closest('bbn-list').$emit('joinmeet', this.source);
       },
       stopMeet(){
         if (this.source[this.prefCfg.id]) {
