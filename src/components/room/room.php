@@ -1,5 +1,5 @@
-<div class="appui-meeting-room bbn-padded bbn-bordered-bottom bbn-flex-width">
-  <div class="bbn-flex-fill bbn-vmiddle bbn-hpadded">
+<div class="appui-meeting-room bbn-padding bbn-border-bottom bbn-flex-width">
+  <div class="bbn-flex-fill bbn-vmiddle bbn-hpadding">
     <div class="bbn-l">
       <div v-text="source[prefCfg.text]"
            :class="{
@@ -15,9 +15,9 @@
       </div>
     </div>
   </div>
-  <div class="bbn-middle bbn-upper bbn-hpadded bbn-b appui-meeting-room-live"
+  <div class="bbn-middle bbn-upper bbn-hpadding bbn-b appui-meeting-room-live"
        v-if="!!source.live"><?= _('LIVE') ?></div>
-  <div class="bbn-hpadded">
+  <div class="bbn-hpadding">
     <div class="bbn-upper bbn-xs"
          :title="moderators">
       <?= _('Administrators') ?>
@@ -28,7 +28,7 @@
       <span v-text="source.moderators.length"/>
     </div>
   </div>
-  <div class="bbn-hpadded">
+  <div class="bbn-hpadding">
     <div class="bbn-upper bbn-xs"
          :title="participants">
       <?= _('Participants') ?>
@@ -39,7 +39,7 @@
       <span v-text="source.participants.length"/>
     </div>
   </div>
-  <div :class="['bbn-hpadded', 'bbn-middle', 'bbn-upper', 'bbn-b', 'bbn-p', {
+  <div :class="['bbn-hpadding', 'bbn-middle', 'bbn-upper', 'bbn-b', 'bbn-p', {
          'bbn-secondary-text-alt': !!administered,
          'bbn-tertiary-text-alt': !administered
        }]"

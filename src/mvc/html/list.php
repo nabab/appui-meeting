@@ -2,7 +2,7 @@
   <div v-if="currentMeeting"
         class="bbn-overlay bbn-flex-height">
     <div v-if="currentMeetingID && currentRoomID && isModerator(currentRoomID)"
-         class="bbn-padded bbn-header bbn-flex-width appui-meeting-toolbar">
+         class="bbn-padding bbn-header bbn-flex-width appui-meeting-toolbar">
       <bbn-button @click="inviteUsers"
                   icon="nf nf-fa-user_plus">
         <?= _('Invite user(s)') ?>
@@ -31,7 +31,7 @@
     </div>
   </div>
   <div v-else
-        class="bbn-overlay bbn-middle bbn-xlpadded bbn-alt-background">
+        class="bbn-overlay bbn-middle bbn-xlpadding bbn-alt-background">
     <div v-if="source.isAdmin"
          class="bbn-top-right bbn-top-sspace bbn-right-sspace">
       <bbn-button class="appui-meeting-admin-btn"
@@ -43,9 +43,9 @@
     <div class="bbn-100 bbn-alt-background">
       <bbn-splitter orientation="auto">
         <bbn-pane v-if="administeredRooms.length"
-                  class="bbn-radius bbn-bordered appui-meeting-adminroom">
+                  class="bbn-radius bbn-border appui-meeting-adminroom">
           <div class="bbn-flex-height">
-            <div class="bbn-header bbn-b bbn-upper bbn-padded bbn-radius-top bbn-no-border bbn-secondary-text-alt bbn-lg">
+            <div class="bbn-header bbn-b bbn-upper bbn-padding bbn-radius-top bbn-no-border bbn-secondary-text-alt bbn-lg">
               <?= _('Administered rooms') ?>
             </div>
             <div class="bbn-flex-fill">
@@ -58,9 +58,9 @@
             </div>
           </div>
         </bbn-pane>
-        <bbn-pane class="bbn-radius bbn-bordered appui-meeting-yourroom">
+        <bbn-pane class="bbn-radius bbn-border appui-meeting-yourroom">
           <div class="bbn-flex-height">
-            <div class="bbn-header bbn-b bbn-upper bbn-padded bbn-radius-top bbn-no-border bbn-tertiary-text-alt bbn-lg">
+            <div class="bbn-header bbn-b bbn-upper bbn-padding bbn-radius-top bbn-no-border bbn-tertiary-text-alt bbn-lg">
               <span v-if="invitedRooms.length"><?= _('Invited') ?></span>
               <span v-else><?= _('Your rooms') ?></span>
             </div>
@@ -71,7 +71,7 @@
                             component="appui-meeting-room"
                             :alternate-background="true"
                             @joinmeet="joinMeet"/>
-                  <div class="bbn-header bbn-b bbn-upper bbn-padded bbn-radius-top bbn-no-border bbn-tertiary-text-alt bbn-lg">
+                  <div class="bbn-header bbn-b bbn-upper bbn-padding bbn-radius-top bbn-no-border bbn-tertiary-text-alt bbn-lg">
                     <?= _('Your rooms') ?>
                   </div>
                 </div>

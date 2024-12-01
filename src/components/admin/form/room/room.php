@@ -6,7 +6,7 @@
           }"
           class="appui-meeting-admin-form-room"
           @success="onSuccess">
-  <div class="bbn-spadded bbn-grid-fields">
+  <div class="bbn-spadding bbn-grid-fields">
     <label class="bbn-label"><?= _('Name') ?></label>
     <bbn-input v-model="source[prefCfg.text]"
                :required="true"

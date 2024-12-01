@@ -4,7 +4,7 @@
             idMeeting: meeting
           }"
           @success="onSuccess">
-  <div class="bbn-padded">
+  <div class="bbn-padding">
     <bbn-multiselect :source="users"
                      v-model="formSource.users"
                      class="bbn-overlay"/>
