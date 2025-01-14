@@ -12,27 +12,27 @@
               ref="table"
               v-if="ready">
       <bbns-column :field="prefCfg.text"
-                   title="<?= _('Name') ?>"/>
+                   label="<?= _('Name') ?>"/>
       <bbns-column :field="prefCfg.id_group"
-                   title="<?= _('Group') ?>"
+                   label="<?= _('Group') ?>"
                    v-if="type === 'groups'"
                    :render="renderGroup"
                    :width="180"/>
       <bbns-column field="created"
-                   title="<?= _('Created') ?>"
+                   label="<?= _('Created') ?>"
                    :render="renderDate"
                    :width="120"
                    cls="bbn-c"/>
       <bbns-column field="moderators"
-                   title="<?= _('Moderators') ?>"
+                   label="<?= _('Moderators') ?>"
                    :render="renderModerators"/>
       <bbns-column field="last_use"
-                   title="<?= _('Last use') ?>"
+                   label="<?= _('Last use') ?>"
                    :render="renderDate"
                    :width="120"
                    cls="bbn-c"/>
       <bbns-column field="last_duration"
-                   title="<?= _('Last duration') ?>"
+                   label="<?= _('Last duration') ?>"
                    :width="120"
                    cls="bbn-c"/>
       <bbns-column :buttons="[{

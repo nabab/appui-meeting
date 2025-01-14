@@ -6,15 +6,15 @@
              :pageable="true"
              :expander="$options.components.expander"
              ref="table">
-    <bbns-column title="<?= _('Started') ?>"
+    <bbns-column label="<?= _('Started') ?>"
                  :field="meetingCfg.started"
                  :render="renderDate"
                  :width="120"/>
-    <bbns-column title="<?= _('Ended') ?>"
+    <bbns-column label="<?= _('Ended') ?>"
                  :field="meetingCfg.ended"
                  :render="renderDate"
                  :width="120"/>
-    <bbns-column title="<?= _('Participants') ?>"
+    <bbns-column label="<?= _('Participants') ?>"
                  field="participants"
                  :render="renderParts"/>
     <bbns-column :buttons="[{

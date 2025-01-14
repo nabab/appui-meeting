@@ -45,9 +45,9 @@
             source.moderators = [];
             break;
         }
-        this.getPopup().open({
+        this.getPopup({
           component: 'appui-meeting-admin-form-room',
-          title: bbn._('Add a public room'),
+          label: bbn._('Add a public room'),
           width: 400,
           componentOptions: {
             source: source,
@@ -66,9 +66,9 @@
         })
       },
       editRoom(row){
-        this.getPopup().open({
+        this.getPopup({
           component: 'appui-meeting-admin-form-room',
-          title: bbn._('Add a public room'),
+          label: bbn._('Add a public room'),
           width: 400,
           componentOptions: {
             source: row,

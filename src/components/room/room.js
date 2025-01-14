@@ -92,8 +92,8 @@
         }
       },
       openReports(){
-        this.getPopup().open({
-          title: bbn._('Logs') + ' - ' + this.source[this.prefCfg.text],
+        this.getPopup({
+          label: bbn._('Logs') + ' - ' + this.source[this.prefCfg.text],
           component: 'appui-meeting-logs',
           source: this.source[this.prefCfg.id],
           width: '90%',

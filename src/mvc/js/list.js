@@ -112,8 +112,8 @@
         if (this.currentRoomID) {
           let room = bbn.fn.getRow(this.source.rooms, {[this.source.prefCfg.id]: this.currentRoomID});
           if (!!room) {
-            this.getPopup().open({
-              title: bbn._('Invite users'),
+            this.getPopup({
+              label: bbn._('Invite users'),
               component: 'appui-meeting-users',
               componentOptions: {
                 meeting: this.currentMeetingID,
