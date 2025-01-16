@@ -9,7 +9,7 @@
            }"/>
       <div v-if="lastUse"
            class="bbn-s bbn-top-sspace">
-        <i class="nf nf-mdi-calendar_clock"
+        <i class="nf nf-md-calendar_clock"
            title="<?= _('Last use') ?>"/>
         <span v-text="lastUse"></span>
       </div>
@@ -51,6 +51,6 @@
                class="bbn-middle bbn-p"
                :source="contextItems"
                tag="div">
-    <i class="nf nf-mdi-dots_vertical"/>
+    <i class="nf nf-md-dots_vertical"/>
   </bbn-context>
 </div>

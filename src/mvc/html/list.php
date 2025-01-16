@@ -13,7 +13,7 @@
           <bbn-input :value="currentMeetingURL"
                      :readonly="true"
                      class="appui-meeting-toolbar-url bbn-right-space"
-                     button-right="nf nf-mdi-content_copy"
+                     button-right="nf nf-md-content_copy"
                      @clickrightbutton="copyURL"/>
         </template>
         <template v-if="currentMeetingExtURL">
@@ -21,7 +21,7 @@
           <bbn-input :value="currentMeetingExtURL"
                      :readonly="true"
                      class="appui-meeting-toolbar-url"
-                     button-right="nf nf-mdi-content_copy"
+                     button-right="nf nf-md-content_copy"
                      @clickrightbutton="copyExtURL"/>
         </template>
       </div>
