@@ -1,12 +1,12 @@
 {
   "text": "Meeting",
   "num": 18,
-  "icon": "nf nf-mdi-webcam",
+  "icon": "nf nf-md-webcam",
   "items": [
     {
       "text": "Meetings",
       "num": 1,
-      "icon": "nf nf-mdi-webcam",
+      "icon": "nf nf-md-webcam",
       "link": "list"
     },
     {
