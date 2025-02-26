@@ -149,7 +149,7 @@
         "null": 0,
         "signed": 0,
         "default": 0,
-        "defaultExpression": false,
+        "defaultExpression": 1,
         "maxlength": 1
       },
       "joined": {
