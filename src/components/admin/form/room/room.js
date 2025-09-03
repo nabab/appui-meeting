@@ -33,7 +33,7 @@
     methods: {
       onSuccess(d){
         let floater = this.closest('bbn-floater');
-        if (bbn.fn.isVue(floater)) {
+        if (bbn.cp.isComponent(floater)) {
           if (d.success) {
             floater.$emit('success');
           }
