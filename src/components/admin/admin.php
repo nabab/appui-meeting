@@ -1,5 +1,5 @@
 <bbn-router :autoload="true"
-            :nav="true"
+            mode="tabs"
             :master="true"
             class="appui-meeting-admin">
   <bbns-container url="public"

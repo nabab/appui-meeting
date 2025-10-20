@@ -2,7 +2,7 @@
 $meeting = new \bbn\Appui\Meeting($model->db);
 $opt =& $model->inc->options;
 $idUser = $model->inc->user->getId();
-$idGroup = $model->inc->user->getGroup();
+$idGroup = $model->inc->user->getIdGroup();
 return [[
   'id' => 'appui-meeting-0',
   'frequency' => 5,
