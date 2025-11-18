@@ -99,7 +99,7 @@
         }
       },
       renderDate(row, col, idx, val){
-        return !!val ? dayjs(val).format('DD/MM/YYYY HH:mm') : '';
+        return !!val ? bbn.date(val).format('DD/MM/YYYY HH:mm') : '';
       },
       renderModerators(row){
         if (row.moderators && row.moderators.length) {
