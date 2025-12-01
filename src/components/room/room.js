@@ -70,7 +70,7 @@
       },
       lastUse(){
         if (!!this.source.last) {
-          return bbn.date(this.source.last).format('DD/MM/YYYY HH:mm');
+          return bbn.dt(this.source.last).format('DD/MM/YYYY HH:mm');
         }
         return '';
       }
