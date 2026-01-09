@@ -1,11 +1,12 @@
 <div class="appui-meeting-admin-toolbar bbn-flex-width bbn-header bbn-spadding">
   <div class="bbn-flex-fill">
     <bbn-button icon="nf nf-fa-plus"
-                @click="$emit('addroom')"><?= _('Add') ?></bbn-button>
+                @click="$emit('addroom')"
+                label="<?= _('Add') ?>"/>
   </div>
   <div class="bbn-vmiddle">
     <span class="bbn-right-sspace"><?= _('Server') ?>:</span>
     <bbn-dropdown :source="servers"
-                  v-model="server"/>
+                  bbn-model="server"/>
   </div>
 </div>

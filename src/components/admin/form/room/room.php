@@ -8,32 +8,32 @@
           @success="onSuccess">
   <div class="bbn-spadding bbn-grid-fields">
     <label class="bbn-label"><?= _('Name') ?></label>
-    <bbn-input v-model="source[prefCfg.text]"
+    <bbn-input bbn-model="source[prefCfg.text]"
                :required="true"
                pattern="^[a-zA-Z0-9-_]*$"
                title="<?= _('You can only use letters, numbers, dashes and underscores') ?>"/>
-    <template v-if="type === 'groups'">
+    <template bbn-if="type === 'groups'">
       <label class="bbn-label"><?= _('Group') ?></label>
       <div>
-        <bbn-dropdown v-model="source[prefCfg.id_group]"
+        <bbn-dropdown bbn-model="source[prefCfg.id_group]"
                       :source="groups"
                       :required="true"
                       :sourceText="groupsCfg.group"
                       :sourceValue="groupsCfg.id"/>
       </div>
     </template>
-    <template v-if="type !== 'users'">
+    <template bbn-if="type !== 'users'">
       <label class="bbn-label"><?= _('Moderators') ?></label>
       <div>
-        <bbn-multiselect v-model="source.moderators"
+        <bbn-multiselect bbn-model="source.moderators"
                         :source="users"
                         :required="true"/>
       </div>
     </template>
-    <template v-if="type === 'users'">
+    <template bbn-if="type === 'users'">
       <label class="bbn-label"><?= _('Moderator') ?></label>
       <div>
-        <bbn-dropdown v-model="source[prefCfg.id_user]"
+        <bbn-dropdown bbn-model="source[prefCfg.id_user]"
                       :source="users"
                       :required="true"/>
       </div>

@@ -54,14 +54,14 @@
             server: this.currentServer,
             type: this.type
           },
-          onOpen: c => {
-            c.$on('success', () => {
+          componentEvents: {
+            success: () => {
               this.getRef('table').updateData();
               appui.success();
-            });
-            c.$on('error', () => {
+            },
+            error: () => {
               appui.error();
-            });
+            }
           }
         })
       },
@@ -75,14 +75,14 @@
             server: this.currentServer,
             type: this.type
           },
-          onOpen: c => {
-            c.$on('success', () => {
+          componentEvents: {
+            success: () => {
               this.getRef('table').updateData();
               appui.success();
-            });
-            c.$on('error', () => {
+            },
+            error: () => {
               appui.error();
-            });
+            }
           }
         })
       },
@@ -117,6 +117,11 @@
           return bbn.fn.getField(appui.groups, this.groupsCfg.group, {[this.groupsCfg.id]: row[this.prefCfg['id_group']]});
         }
         return '';
+      }
+    },
+    mounted(){
+      if (this.servers.length) {
+        this.onServerChanged(this.servers[0].value);
       }
     }
   };

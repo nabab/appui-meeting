@@ -25,8 +25,8 @@
         return this.admin?.source?.prefCfg;
       }
     },
-    beforeMount(){
-      this._admin = this.closest('appui-meeting-admin');
+    created(){
+      this._admin = appui.getRegistered('appui-meeting-admin');
     }
   }];
   bbn.cp.addPrefix('appui-meeting-admin-', null, mixins);
@@ -35,6 +35,9 @@
       return {
         root: appui.plugins['appui-meeting'] + '/'
       }
+    },
+    created(){
+      appui.register('appui-meeting-admin', this);
     }
   };
 })();

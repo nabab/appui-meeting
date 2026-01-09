@@ -22,9 +22,9 @@
           if (!this.source[gf] || !this.source[gf].length) {
             return [];
           }
-          return bbn.fn.filter(appui.app.getActiveUsers(), u => u[this.usersCfg.id_group] === this.source[gf]);
+          return bbn.fn.filter(appui.getActiveUsers(), u => u[this.usersCfg.id_group] === this.source[gf]);
         }
-        return appui.app.getActiveUsers();
+        return appui.getActiveUsers();
       },
       groups(){
         return appui.groups;
@@ -32,14 +32,11 @@
     },
     methods: {
       onSuccess(d){
-        let floater = this.closest('bbn-floater');
-        if (bbn.cp.isComponent(floater)) {
-          if (d.success) {
-            floater.$emit('success');
-          }
-          else {
-            floater.$emit('error');
-          }
+        if (d.success) {
+          this.$emit('success');
+        }
+        else {
+          this.$emit('error');
         }
       }
     },

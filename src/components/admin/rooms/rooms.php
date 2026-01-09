@@ -10,12 +10,12 @@
               }"
               :pageable="true"
               ref="table"
-              v-if="ready">
+              bbn-if="ready">
       <bbns-column :field="prefCfg.text"
                    label="<?= _('Name') ?>"/>
       <bbns-column :field="prefCfg.id_group"
                    label="<?= _('Group') ?>"
-                   v-if="type === 'groups'"
+                   bbn-if="type === 'groups'"
                    :render="renderGroup"
                    :width="180"/>
       <bbns-column field="created"
