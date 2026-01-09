@@ -10,19 +10,19 @@
         return this._admin;
       },
       root(){
-        return this.admin.root;
+        return this.admin?.root;
       },
       servers(){
-        return this.admin.source.servers;
+        return this.admin?.source?.servers;
       },
       usersCfg(){
-        return this.admin.source.usersCfg;
+        return this.admin?.source?.usersCfg;
       },
       groupsCfg(){
-        return this.admin.source.groupsCfg;
+        return this.admin?.source?.groupsCfg;
       },
       prefCfg(){
-        return this.admin.source.prefCfg;
+        return this.admin?.source?.prefCfg;
       }
     },
     beforeMount(){
