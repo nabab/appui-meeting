@@ -38,6 +38,9 @@
     },
     created(){
       appui.register('appui-meeting-admin', this);
+    },
+    beforeDestroy(){
+      appui.unregister('appui-meeting-admin');
     }
   };
 })();
