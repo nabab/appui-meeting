@@ -117,7 +117,7 @@
               component: 'appui-meeting-users',
               componentOptions: {
                 meeting: this.currentMeetingID,
-                users: bbn.fn.filter(appui.app.getActiveUsers(), u => !room.invited.includes(u.value))
+                users: bbn.fn.filter(appui.getActiveUsers(), u => !room.invited.includes(u.value))
               },
               width: 400,
               height: 500
