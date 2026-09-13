@@ -1,19 +1,24 @@
 {
-  "name": "bbn/appui-meeting",
-  "description": "A RTC meeting implementation for appui",
-  "keywords": ["rtc", "meeting", "php", "appui"],
-  "homepage": "https://github.com/nabab/appui-meeting",
-  "license": "MIT",
-  "authors": [
-    {
-      "name": "Thomas Nabet",
-      "email": "thomas.nabet@gmail.com",
-      "homepage": "https://bbn.solutions",
-      "role": "Developer"
+    "name": "bbn\/appui-meeting",
+    "description": "A RTC meeting implementation for appui",
+    "keywords": [
+        "rtc",
+        "meeting",
+        "php",
+        "appui"
+    ],
+    "homepage": "https:\/\/github.com\/nabab\/appui-meeting",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Thomas Nabet",
+            "email": "thomas.nabet@gmail.com",
+            "homepage": "https:\/\/bbn.solutions",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.5",
+        "bbn\/bbn": "^1.1"
     }
-  ],
-  "require": {
-    "php": ">=8.3",
-    "bbn/bbn": "dev-master"
-  }
 }
